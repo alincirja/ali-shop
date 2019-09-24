@@ -1,0 +1,68 @@
+@import "../../style/variables";
+
+.app-header {
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+    background-color: $darkGrey;
+    z-index: 5;
+    box-shadow: 0 0 3px rgba($white, .1);
+    top: 0;
+
+    .heading {
+        text-transform: uppercase;
+        font-weight: 700;
+    }
+
+    .add-list {
+        position: relative;
+        width: 18px;
+        height: 18px;
+        transition: all .3s;
+
+        &:before,
+        &:after {
+            content: "";
+            position: absolute;
+            background-color: #fff;
+            border-radius: 2px;
+        }
+
+        &:before {
+            height: 100%;
+            width: 4px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        &:after {
+            height: 4px;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        &.with-form {
+            transform: rotate(45deg);
+        }
+    }
+}
+
+.empty-lists {
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 35%;
+
+    h5 {
+        margin: 0 0 5px;
+    }
+
+    p {
+        margin: 0;
+        font-size: 10px;
+    }
+}

@@ -1,0 +1,31 @@
+@import "../../style/variables";
+
+.product-form {
+    display: flex;
+
+    input {
+        width: 100%;
+        flex-grow: 1;
+        padding: 15px 15px;
+        border-radius: 15px 0 0 15px;
+        border: 3px solid transparent;
+        outline: none;
+        background-color: rgba($white, .1);
+        transition: all .3s;
+        color: rgba($white, .9);
+
+        &:focus {
+            border-color: $green;
+        }
+    }
+
+    button {
+        width: 65px;
+        border: none;
+        background-color: $green;
+        color: $white;
+        font-size: 30px;
+        font-weight: 900;
+        border-radius: 0 15px 15px 0;
+    }
+}

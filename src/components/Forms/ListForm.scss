@@ -1,0 +1,49 @@
+@import "../../style/variables";
+
+.list-form {
+    background-color: $darkGrey;
+    position: fixed;
+    width: 100%;
+    transform: translateX(-100%);
+    bottom: 0;
+    top: 49px;
+    transition: all .3s;
+    padding: 15px 20px;
+    z-index: 3;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        align-items: center;
+        padding-top: 75px;
+    }
+
+    &.show {
+        transform: translateX(0);
+    }
+
+    label {
+        margin: 0 0 15px;
+    }
+
+    input {
+        border: none;
+        border-bottom: 3px solid $white;
+        background-color: transparent;
+        padding: 15px 0;
+        width: 100%;
+        outline: none;
+        color: $white;
+    }
+
+    button {
+        width: 100%;
+        background-color: $green;
+        border: none;
+        color: $white;
+        text-transform: uppercase;
+        font-weight: 700;
+        padding: 15px;
+    }
+}
