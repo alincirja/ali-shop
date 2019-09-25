@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { connect } from "react-redux";
 
 import ProductForm from "../../Forms/ProductForm";
 import Product from "./Product/Product";
+import EditProductForm from "../../Forms/EditProductForm";
 
 import * as actionTypes from "../../../store/actions";
 
 import "./Single.scss";
 
 const Single = props => {
+    const [contextProduct, setContextProduct] = useState("");
+
     const selectedList = props.shoppingLists[props.selectedListId];
     const { products } = selectedList;
     let status = 0;
@@ -20,21 +23,24 @@ const Single = props => {
         }
     }
     return (
-        <div className="single-list">
-            <header>
-                <div className="go-back" onClick={() => props.goBack("")}>
-                <span className="btn-back"></span>
+        <React.Fragment>
+            <div className="single-list">
+                <header>
+                    <div className="go-back" onClick={() => props.goBack("")}>
+                    <span className="btn-back"></span>
+                    </div>
+                    <h4>{selectedList.name}</h4>
+                    <div className="status">{`${status}/${products.length}`}</div>
+                </header>
+
+                <ProductForm />
+
+                <div className={`container ${products.length ? "with-products" : ""}`}>
+                    {products.length ? products.map((prd, index) => <Product setContextProduct={setContextProduct} key={index} productId={prd.id} />) : ""}
                 </div>
-                <h4>{selectedList.name}</h4>
-                <div className="status">{`${status}/${products.length}`}</div>
-            </header>
-
-            <ProductForm />
-
-            <div className={`container ${products.length ? "with-products" : ""}`}>
-                {products.length ? products.map((prd, index) => <Product key={index} productId={prd.id} />) : ""}
             </div>
-        </div>
+            { contextProduct !== "" && <EditProductForm contextProduct={contextProduct} setContextProduct={setContextProduct} /> }
+        </React.Fragment>
     );
 };
 

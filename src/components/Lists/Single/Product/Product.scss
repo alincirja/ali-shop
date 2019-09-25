@@ -5,30 +5,48 @@
     font-weight: 300;
     font-size: 14px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px 0;
+    align-items: stretch;
+    position: relative;
+
+    .info {
+        display: flex;
+        align-items: center;
+        padding: 10px 0;
+        flex: 1;
+        justify-content: space-between;
+    }
+
+    .title {
+        margin-right: 15px;
+        position: relative;
+
+        &:before {
+            content: "";
+            height: 1px;
+            background-color: $white;
+            left: 0;
+            right: 100%;
+            top: 50%;
+            position: absolute;
+            transition: all .5s;
+        }
+    }
 
     .tick {
         width: 12px;
         height: 12px;
         border: 3px solid $white;
         border-radius: 50%;
+        transition: all .4s;
     }
 
     &.purchased {
         .title {
             color: rgba($white, .35);
-            position: relative;
 
             &:before {
-                content: "";
-                height: 1px;
-                background-color: $white;
                 left: -5px;
                 right: -5px;
-                top: 50%;
-                position: absolute;
             }
         }
 
@@ -39,44 +57,6 @@
             border-color: $green;
             transform: rotate(45deg);
             border-radius: 0;
-        }
-    }
-
-    form {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        box-shadow: 0 0 5px $white;
-
-        .delete {
-            background-color: $danger;
-            padding: 5px 5px;
-            font-size: 10px;
-            text-transform: uppercase;
-        }
-
-        input {
-            flex: 1;
-            outline: none;
-            font-size: 12px;
-            color: $darkGrey;
-            background: rgba($white, .35);
-            border: none;
-            padding: 5px 10px;
-        }
-
-        .cancel,
-        button {
-            background: $green;
-            border: none;
-            width: 35px;
-            text-align: center;
-            line-height: 20px;
-            padding: 2px;
-            font-weight: 700;
-            font-size: 20px;
-            color: $white;
         }
     }
 }

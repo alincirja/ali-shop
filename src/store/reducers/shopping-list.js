@@ -8,7 +8,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     let newState;
     switch (action.type) {
-        case actionTypes.LIST_CREATE:
+        case actionTypes.LIST_CREATE: {
             const newId = Math.random().toString() + action.listName;
             const newList = {
                 name: action.listName,
@@ -21,24 +21,19 @@ const reducer = (state = initialState, action) => {
                 },
                 selectedListId: newId
             }
-            break;
-        case actionTypes.LIST_DELETE:
+        }
+        break;
+        case actionTypes.LIST_DELETE: {
             const lists = {...state.shoppingLists};
             delete lists[action.id];
             newState = {
                 ...state,
                 shoppingLists: {...lists}
             };
-            break;
-        case actionTypes.FETCH_LISTS:
-            newState = {
-                ...state,
-                shoppingLists: {
-                    ...action.lists
-                }
-            };
-            break;
-        case actionTypes.ITEM_ADD:
+        }
+        break;
+        // eslint-disable-next-line no-lone-blocks
+        case actionTypes.ITEM_ADD: {
             newState = {
                 ...state,
                 shoppingLists: {
@@ -56,7 +51,8 @@ const reducer = (state = initialState, action) => {
                     }
                 }
             };
-            break;
+        };
+        break;
         case actionTypes.ITEM_TOGGLE_PURCHASING: {
             const products = state.shoppingLists[state.selectedListId].products;
             const productIndex = products.findIndex(prd => prd.id === action.itemId);
@@ -72,6 +68,38 @@ const reducer = (state = initialState, action) => {
                 }
             };
         };
+        break;
+        case actionTypes.ITEM_EDIT: {
+            const products = state.shoppingLists[state.selectedListId].products;
+            const productIndex = products.findIndex(prd => prd.id === action.itemId);
+            products[productIndex].name = action.newName;
+            newState = {
+                ...state,
+                shoppingLists: {
+                    ...state.shoppingLists,
+                    [state.selectedListId]: {
+                        ...state.shoppingLists[state.selectedListId],
+                        products: [...products]
+                    }
+                }
+            };
+        };
+        break;
+        case actionTypes.ITEM_DELETE: {
+            const products = [...state.shoppingLists[state.selectedListId].products];
+            const index = products.findIndex(prd => prd.id === action.itemId);
+            products.splice(index, 1);
+            newState = {
+                ...state,
+                shoppingLists: {
+                    ...state.shoppingLists,
+                    [state.selectedListId]: {
+                        ...state.shoppingLists[state.selectedListId],
+                        products: [...products]
+                    }
+                }
+            };
+        }
         break;
         case actionTypes.SELECT_LIST:
             newState = {
